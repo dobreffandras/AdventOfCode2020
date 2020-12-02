@@ -2,7 +2,7 @@
 
 open System
 
-[<EntryPointAttribute>]
+[<EntryPoint>]
 let main argv =
-    Console.WriteLine Day1.main
+    Console.WriteLine Day2.main
     0
