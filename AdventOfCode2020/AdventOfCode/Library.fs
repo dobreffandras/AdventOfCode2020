@@ -204,30 +204,27 @@ module Say =
 1246
 1864
 1702"
-    
-    let rec searchTwentyTwentyWithNumber (currentNumber: int) (numbers: seq<int>) : Option<int*int> =
-        match numbers with
-            | _ when Seq.isEmpty numbers -> None
-            | _ ->
-                let otherNumber = numbers |> Seq.head
-                let tail  = numbers |> Seq.tail
-                if currentNumber + otherNumber = 2020 then Some(currentNumber, otherNumber)
-                else searchTwentyTwentyWithNumber currentNumber tail
         
-    let rec searchTwentyTwenty (numbers: seq<int>) : int*int =
-        let headMatches = searchTwentyTwentyWithNumber (Seq.head numbers) numbers
-        match headMatches with
-            | None -> searchTwentyTwenty (Seq.tail numbers)
-            | Some n -> n
-            
-        
+    let rec searchTwentyTwenty (numbers: seq<int>) : Option<int*int*int> =
+            let findings = seq {
+                for x in numbers do
+                    let numbersY = Seq.tail numbers
+                    for y in numbersY do
+                        let numbersZ = Seq.tail numbersY
+                        for z in numbersZ ->
+                            if x + y + z = 2020 then
+                                Some(x, y, z)
+                            else
+                                None
+                }
+            match Seq.tryFind Option.isSome findings with
+                | None -> None
+                | Some x -> x
+
     let hello : string =
         let result = input.Split([|Environment.NewLine|], StringSplitOptions.RemoveEmptyEntries)
         let numbers = result|> Seq.map (fun x -> x |> int)
         let result = searchTwentyTwenty numbers
-        let (x, y) = result
-        let multiplication = x * y
-        multiplication |> string
-        
-        
-        
+        match result with
+            | None -> "Not Found :("
+            | Some (x, y, z) -> string (x * y *z)
