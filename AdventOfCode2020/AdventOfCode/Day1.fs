@@ -2,7 +2,7 @@
 
 open System
 
-module Say =
+module Day1 =
     
     let input = "1509
 1857
@@ -221,7 +221,7 @@ module Say =
                 | None -> None
                 | Some x -> x
 
-    let hello : string =
+    let main : string =
         let result = input.Split([|Environment.NewLine|], StringSplitOptions.RemoveEmptyEntries)
         let numbers = result|> Seq.map (fun x -> x |> int)
         let result = searchTwentyTwenty numbers

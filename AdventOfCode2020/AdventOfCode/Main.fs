@@ -4,5 +4,5 @@ open System
 
 [<EntryPointAttribute>]
 let main argv =
-    Console.WriteLine Say.hello
+    Console.WriteLine Day1.main
     0
