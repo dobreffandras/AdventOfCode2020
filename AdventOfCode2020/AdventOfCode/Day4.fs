@@ -82,9 +82,6 @@ module Day4 =
                 && (Seq.forall (fun (f : Field) -> f.isValid) fields)
 
     module Parser =
-        let splitByBlankLine (input : string) : string [] =
-            let sepString = Environment.NewLine + Environment.NewLine 
-            input.Split([|sepString|], StringSplitOptions.RemoveEmptyEntries)
             
         let splitBySpaceOrNewline (input : string) : string [] =
             input.Split([|Environment.NewLine; " "|], StringSplitOptions.RemoveEmptyEntries)            
