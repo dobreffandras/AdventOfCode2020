@@ -11,3 +11,6 @@ module Parser =
     let parseToRows(input : string) : string [] =
         input.Split([|Environment.NewLine|], StringSplitOptions.RemoveEmptyEntries)
 
+    let splitBySpace (row : string) : string [] =
+        row.Split([|" "|], StringSplitOptions.RemoveEmptyEntries)
+    

@@ -18,9 +18,6 @@ module Day2 =
         }
     
     module Parser =
-        let splitBySpace (row : string) : string [] =
-            row.Split([|" "|], StringSplitOptions.RemoveEmptyEntries)
-    
         let toEntry (splitRow : string []) : Entry = 
             let minMaxSplit = (splitRow.[0]).Split([|"-"|], StringSplitOptions.RemoveEmptyEntries)
             let minCount = int (minMaxSplit.[0])
@@ -37,7 +34,7 @@ module Day2 =
                 password = password
             }
             
-        let parseEntry : string -> Entry = (splitBySpace >> toEntry)
+        let parseEntry : string -> Entry = (Parser.splitBySpace >> toEntry)
     
     let isValidPassword(entry : Entry) : bool =
         let policy = entry.policy
