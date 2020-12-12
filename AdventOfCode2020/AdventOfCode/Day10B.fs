@@ -28,6 +28,7 @@ module Day10B =
             
     
     /// <summary>
+    /// WARNING! only works for n = 1..4
     /// Counts the possibilities for skipping 0-n jolts  in a way that the adapter line will still be valid.
     /// The formula is:
     /// length(n) = length(n-1) + (n-1)
