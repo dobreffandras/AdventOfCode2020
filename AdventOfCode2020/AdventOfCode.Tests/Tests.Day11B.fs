@@ -1,9 +1,10 @@
 ﻿namespace AdventOfCode.Tests
 
+open AdventOfCode
 open Xunit
-open AdventOfCode.Day11A
+open AdventOfCode.Day11B
 
-module Day11A =
+module Day11B =
     
     [<Fact>]
     let ``Parses ferry with single floor position`` () =
@@ -58,7 +59,7 @@ LL"
     let ``nextFerrySetup leaves occupied seat when there are more than 4 occupied neighbours`` () =
         let initial =
             [[Floor; Floor; Floor];
-            [Occupied; Empty; Occupied];
+            [Occupied; Occupied; Occupied];
             [Occupied; Occupied; Occupied]] |> array2D
         let expected =
             [[Floor; Floor; Floor];
@@ -81,15 +82,42 @@ LL"
             
         let result = occupySeats initial
         Assert.Equal(expected, result)
-    
+        
+    [<Fact>]
+    let ``getOccupiedNeighbourCount counts first seats in all directions`` () =
+        let ferrySetupInput = "..#.#
+#L...
+.#L.#
+...#.
+L.#.#"
+        let ferrySetup = Parser.parseFerrySeats ferrySetupInput
+        let occupiedNeighbourCount = getOccupiedNeighbourCount ferrySetup 2 2
+        
+        // Note: Occupied seats that should be detected are (numbers): 
+        // ..2.3
+        // #L...
+        // .1L.4
+        // ...5.
+        // L.6.#
+        Assert.Equal(6, occupiedNeighbourCount)
+        
+    [<Fact>]
+    let ``getOccupiedNeighbourCount counts first seats in all directions #2`` () =
+        let ferrySetupInput = "#.#
+###
+#.#
+###"
+        let ferrySetup = Parser.parseFerrySeats ferrySetupInput
+        let occupiedNeighbourCount = getOccupiedNeighbourCount ferrySetup 1 0
+        
+        // Note: Occupied seats that should be detected are (numbers): 
+        // 1.#
+        // #2#
+        // 4.#
+        // ##3
+        Assert.Equal(4, occupiedNeighbourCount)
+        
     [<Fact>]
     let ``main runs occupySeatsCorrectly for sample input`` () =
         let result = main AdventOfCode.Inputs.Day11.sample 
-        Assert.Equal("37", result)
-        
-    [<Fact>]
-    let ``main runs occupySeatsCorrectly for puzzle input`` () =
-        let result = main AdventOfCode.Inputs.Day11.input 
-        Assert.Equal("2281", result)
-    
-    
+        Assert.Equal("26", result)
