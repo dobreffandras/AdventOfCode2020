@@ -4,5 +4,5 @@ open System
 
 [<EntryPoint>]
 let main argv =
-    Console.WriteLine (Day11B.main Inputs.Day11.input)
+    Console.WriteLine (Day12A.main Inputs.Day12.input)
     0
